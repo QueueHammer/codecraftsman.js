@@ -26,35 +26,31 @@ cc = (function (cc) {
         }, obj);
       };
     };
-    
-    _.mixin({
-      ccPluck: function (list, propChain) {
-        var f = ferrit(propChain);
-        return _.map(list, function (d) { return f(d); });
-      },
-      ccSortBy: function (list) {
-        
-        var sortWith = function(f){
-          return function (a, b) {
-            if(f(a) > f(b)) return 1;
-            if(f(a) < f(b)) return -1;
-            return 0;
-          };
-        };
-        
-        var sortList = _.chain(arguments)
-          .last(arguments.length-1)
-          .map(function (d) {
-            return sortWith(_.isFunction(d) ? d : ferrit(d));
-          })
-          .value();
-        
-        return _.clone(list).sort(function (a, b) {
-          return _.reduce(sortList, function (m, d, i) {
-            return m !== 0 ? m : d(a, b);
-          }, 0);
-        }); 
-      }
-	});
   }
+  
+  function ScriptPath() {
+    var scriptPath = '';
+    try {
+      throw new Error();
+    }
+    catch(e) {
+      pathParts = e.stack.match(/((http:\/\/.+\/)([^\/]+\.js)):/);
+    }
+  
+    this.fullPath = function() {
+      return pathParts[1];
+    };
+  
+    this.path = function() {
+      return pathParts[2];
+    };
+    
+    this.file = function() {
+      return pathParts[3];
+    };
+  }
+  
+  window.getScriptPath = function () {
+    return new ScriptPath();	
+  };
 })(cc || {}); 
