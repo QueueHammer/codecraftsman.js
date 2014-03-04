@@ -12,7 +12,7 @@
     console.log(this.toString());
   };
 
-  if(typeof(_) !== undefined){
+  if(typeof(_) !== 'undefined'){
     String.prototype.template = function (obj, opt) {
       var defaultOpt = {interpolate: /\{\{(.+?)\}\}/g};
       _.extend(defaultOpt, opt);
