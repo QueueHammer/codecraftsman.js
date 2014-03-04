@@ -1,10 +1,9 @@
 #codecraftsman.js
 ================
 
-Some useful extensions to string, logging, to get a ScriptPath.
+Some useful extensions to string, logging, and to get a ScriptPath.
 
-Unlike most libries this small set of helper functions are global in scope. The extentions to string extend the prototype
-and String.template will not be applied unless underscore.js is present.
+Unlike most libries this small set of helper functions are global in scope. The extentions to string extend the prototype and String.template will not be applied unless underscore.js is present.
 
 ##String.format()
 
@@ -28,8 +27,7 @@ This is a shortcut to the underscore template function. It applies an object dir
 
 ##String.log()
 
-Now with all these ways to make readbale string faster we should be able to why not an easy way to output them to the
-console? Why not make logging eaiser all tougether? O.K.
+With two new ways to cleanly create new strings it will not be long before they start gettnig logged. So why not make loggin strings eaiser all tougether? O.K.
 
     //Any string can now be logged to the console
     'This will show up on console'.log();
@@ -47,30 +45,30 @@ should be in another place. ScriptPath will help with that.
     //Create a new path obj for in script 'http://localhost:81/src/demo.js'
     var srcPathInfo = ScriptPath();
 
-###(new ScriptPath()).fullPath()
+###srcPathObj.fullPath()
 
 Returns the full path from protocall, http/https, to file with extension.
 
     //Will return 'http://localhost:81/src/demo.js'
     srcPathInfo.fullPath();
 
-###(new ScriptPath()).path()
+###srcPathObj.path()
 
 Returns the path with protocall and a trailing slash
 
     //Will return 'http://localhost:81/src/'
     srcPathInfo.path();
 
-###(new ScriptPath()).file()
+###srcPathObj.file()
 
-Returns just the file ~with~ extention.
+Returns just the file *with* extention.
 
     //Will return 'demo.js'
     srcPathInfo.file();
 
-###(new ScriptPath()).fileNoExt()
+###srcPathObj.fileNoExt()
 
-Returns just the file ~with out~ extention.
+Returns just the file *with out* extention.
 
     //Will return 'demo'
     srcPathInfo.fileNoExt();
